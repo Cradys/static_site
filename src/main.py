@@ -10,14 +10,12 @@ destination_dir_path = "./docs"
 source_dir_path = "./static"
 template_path = "./template.html"
 content_dir_path = "./content"
-
-basepath = sys.argv[0]
-if basepath == "src/main.py" or not basepath:
-    basepath = "/"
-print(f"basepath ---- {basepath}")
+default_basepath = "/"
 
 def main():
-    test_node = TextNode("This is some anchor text", TextType("link"), "https://www.boot.dev")
+    basepath = default_basepath
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
 
     generate_public(source_dir_path, destination_dir_path)
     # generate_page(content_path, template_path, destination_path)

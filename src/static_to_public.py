@@ -6,7 +6,7 @@ def generate_public(source_path, destination_path):
     destination = os.path.abspath(destination_path)
 
     if os.path.exists(destination):
-        shutil.rmtree("./public/")
+        shutil.rmtree(destination)
     
     os.mkdir(destination)
     copy_source_to_destination(source, destination)    
