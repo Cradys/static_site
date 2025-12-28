@@ -10,7 +10,10 @@ def extract_title(markdown):
             print(f"Extracted title: {line[2:]}")
             return line[2:]
     raise Exception("title not found")
-    
+
+
+
+# deprecated
 def generate_page(from_path, template_path, dest_path):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     
@@ -31,6 +34,7 @@ def generate_page(from_path, template_path, dest_path):
     with open(dest_path+"/index.html", "w") as f:
         f.write(html_file)
 
+
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
     print(f"Generating pages from {dir_path_content} to {dest_dir_path} using {template_path}")
 
@@ -43,11 +47,12 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
     
     
     for file in os.listdir(dir_path_content):
+        
         dir_content = os.path.join(dir_path_content, file)
         dest_path = os.path.join(dest_dir_path, file)
 
         if os.path.isfile(dir_content):
-            print(dir_content, file)
+            dest_path = Path(dest_path).with_suffix(".html")
             with open(dir_content) as f:
                 markdown_file = f.read()
             html = markdown_to_html_node(markdown_file).to_html()
